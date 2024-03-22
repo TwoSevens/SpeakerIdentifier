@@ -21,10 +21,10 @@ model = Sequential([
     Input(shape=X_train[0].shape),
     Conv2D(32, (3, 3), activation='relu'),
     MaxPooling2D((2, 2)),
+    Dropout(random.random()*0.2, seed=random.seed()),
     Conv2D(64, (3, 3), activation='relu'),
     MaxPooling2D((2, 2)),
     Flatten(),
-    Dropout(random.random()*0.2, seed=random.seed()),
     Dense(128, activation='relu'),
     Dense(len(classes), activation='softmax')
 ])
