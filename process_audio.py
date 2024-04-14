@@ -20,7 +20,7 @@ def load_and_preprocess_data(data_dir, classes, target_shape=(128, 128)):
     
     for i, class_name in enumerate(classes):
         class_dir = os.path.join(data_dir, class_name)
-        for filename in os.listdir(class_dir):
+        for filename in os.listdir(class_dir)[:min(len(os.listdir(class_dir)), 300)]:
             if filename.endswith('.wav'):
                 file_path = os.path.join(class_dir, filename)
                 audio_data, sample_rate = librosa.load(file_path, sr=16000)
