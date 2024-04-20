@@ -21,21 +21,28 @@ def record_audio(filename, duration=5, samplerate=16000, channels=2):
     audio, sr = librosa.load(filename, sr=samplerate)
     return audio, sr
 
-names = ["Ahmed Hussain", "Alasfoor", "Ali Ayyad", "Ali Jaffar", "Elyas"]
-model_path = os.path.join("Models", sorted(os.listdir("Models"))[-1])
-model = load_model(model_path)
+names = os.listdir('Audio')
+model_path = os.path.join("Models", sorted(os.listdir("Models"))[-2])
+latest_model = load_model(model_path)
+best_model = load_model( os.path.join("Models", "checkpoint.keras"))
 print("loaded", model_path)
 
 while True:
     input("Enter when ready")
-    # Example usage
     filename = "recorded_audio.wav"
     audio, sr = record_audio(filename)
 
     aud = process_audio(audio, sr, (128, 128))
-    prediction = model.predict(np.array([aud]), verbose=0)[0]
+    aud = np.array([aud])
+    best_prediction = best_model.predict(aud, verbose=0)[0]
+    prediction = latest_model.predict(aud, verbose=0)[0]
 
+    print("Latest Model".center(20, "-"))
     for index, certainty in enumerate(prediction):
+        print(names[index], round(certainty*100, 2))
+
+    print("Best Model".center(20, "-"))
+    for index, certainty in enumerate(best_prediction):
         print(names[index], round(certainty*100, 2))
 
     print()
