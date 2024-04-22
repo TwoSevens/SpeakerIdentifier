@@ -13,6 +13,7 @@ class AttendanceApp:
     def __init__(self, master):
         self.master = master
         master.title("Attendance Taker")
+        master.geometry('300x200')
 
         self.speakers = sorted(os.listdir("Audio"))
 
@@ -29,7 +30,7 @@ class AttendanceApp:
         self.reset_button = tk.Button(master, text="Reset", command=self.reset)
         self.reset_button.pack()
 
-        self.model_path = os.path.join("Models", sorted(os.listdir("Models"))[-1])
+        self.model_path = os.path.join("Models", "checkpoint.keras")
         self.model = load_model(self.model_path)
         print("Loaded", self.model_path)
 

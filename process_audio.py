@@ -20,6 +20,7 @@ def process_audio(audio_data, sample_rate, target_shape=(128, 128)):
         audio_data = audio_data * 2
 
     mel_spectrogram = librosa.feature.melspectrogram(y=audio_data, sr=sample_rate)
+    mel_spectrogram = librosa.power_to_db(mel_spectrogram)
     mel_spectrogram = resize(np.expand_dims(mel_spectrogram, axis=-1), target_shape)
     return mel_spectrogram
 

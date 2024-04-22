@@ -22,7 +22,7 @@ def record_audio(filename, duration=5, samplerate=16000, channels=2):
     return audio, sr
 
 names = os.listdir('Audio')
-model_path = os.path.join("Models", sorted(os.listdir("Models"))[-2])
+model_path = os.path.join("Models", "checkpoint.keras")
 latest_model = load_model(model_path)
 best_model = load_model( os.path.join("Models", "checkpoint.keras"))
 print("loaded", model_path)

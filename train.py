@@ -1,5 +1,6 @@
 import numpy as np
 import tensorflow as tf
+import pickle
 from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import Adam
@@ -40,7 +41,7 @@ checkpoint_path = "Models/checkpoint.keras"
 checkpoint = ModelCheckpoint(checkpoint_path, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
 
 # Train the model with the checkpoint callback
-model.fit(X_train, y_train, epochs=15, batch_size=16, validation_data=(X_test, y_test), callbacks=[checkpoint])
+model.fit(X_train, y_train, epochs=50, batch_size=16, validation_data=(X_test, y_test), callbacks=[checkpoint])
 
 # After training, save the final model
 model.save("Models/{:%Y.%m.%d__%H_%M}.keras".format(datetime.now()))
