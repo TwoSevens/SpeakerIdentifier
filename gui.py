@@ -1,6 +1,5 @@
 import os
-import tkinter as tk
-from tkinter import filedialog, messagebox
+import ttkbootstrap as tk
 import sounddevice as sd
 import soundfile as sf
 import librosa
@@ -74,6 +73,6 @@ def record_audio(filename, duration=5, samplerate=16000, channels=2):
 
 
 if __name__ == "__main__":
-    root = tk.Tk()
+    root = tk.Window()
     app = AttendanceApp(root)
     root.mainloop()
